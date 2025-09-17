@@ -7,6 +7,8 @@ const connection = require('../../src/db/connection');
 
 const { expect, use } = chai;
 
+chai.use(chaiHttp);
+
 const talkerList = [
     {
         id: 1,
@@ -25,7 +27,7 @@ const talkerList = [
 ];
 
 describe('Test talker endpoints', function () {
-    it('List all talkers', async function (s) {
+    it('List all talkers', async function () {
         sinon.stub(connection, 'execute').resolves([talkerList]);
        
         const response = await chai
@@ -36,4 +38,5 @@ describe('Test talker endpoints', function () {
         expect(response.body).to.deep.equal(talkerList);
     });
 
+    afterEach(sinon.restore);
 });

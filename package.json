@@ -1,5 +1,5 @@
 {
-  "name": "mycash-api",
+  "name": "talker_manager",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
