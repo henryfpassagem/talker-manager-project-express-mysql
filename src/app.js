@@ -5,6 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/talker', talkerRoutes);
+app.use('/talkers', talkerRoutes);
 
 module.exports = app;

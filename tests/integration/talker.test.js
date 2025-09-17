@@ -32,10 +32,21 @@ describe('Test talker endpoints', function () {
        
         const response = await chai
             .request(app)
-            .get('/talker');
+            .get('/talkers');
 
         expect(response.status).to.equal(200);
         expect(response.body).to.deep.equal(talkerList);
+    });
+
+    it('Lists talker by Id', async function () {
+        sinon.stub(connection, 'execute').resolves([[talkerList[0]]]);
+
+        const response = await chai
+            .request(app)
+            .get('/talkers/1');
+
+        expect(response.status).to.equal(200);
+        expect(response.body).to.deep.equal(talkerList[0]);
     });
 
     afterEach(sinon.restore);
