@@ -16,11 +16,11 @@ services:
     ports:
       - 3001:3001
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_HOST: database
-      MYSQL_PORT: 3306
-      MYSQL_DATABASE: TalkerDB
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DATABASE: ${DB_NAME}
     # Inialize this container after the database container is up.
     depends_on:
       database:
@@ -30,9 +30,10 @@ services:
     image: mysql:8.0.32
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=TalkerDB
-
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    # env_file:
+    #   - .env
     healthcheck:
       # test if the MySQL server is responding
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
